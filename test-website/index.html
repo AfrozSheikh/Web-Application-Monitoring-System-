@@ -1,147 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDK Test Website</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        button {
-            padding: 10px 15px;
-            margin: 5px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        button.error {
-            background-color: #f44336;
-        }
-        .log {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            max-height: 300px;
-            overflow-y: auto;
-            background: #f9f9f9;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monitoring SDK Test</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: #f4f6f8;
+      color: #222;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    p {
+      text-align: center;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px 30px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #34495e;
+      border-left: 4px solid #4CAF50;
+      padding-left: 8px;
+      font-size: 1.2rem;
+    }
+
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    button {
+      flex: 1 1 45%;
+      min-width: 200px;
+      padding: 10px 15px;
+      font-size: 0.95rem;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      background: #45a049;
+      transform: translateY(-2px);
+    }
+
+    button.error {
+      background: #e74c3c;
+    }
+
+    button.error:hover {
+      background: #c0392b;
+    }
+
+    .log {
+      margin-top: 15px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #1e1e1e;
+      color: #00ff90;
+      font-family: monospace;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+
+    .log div {
+      margin-bottom: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      font-size: 0.85rem;
+      color: #777;
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Monitoring SDK Test Website</h1>
-    <p>This page is for testing the Monitoring SDK functionality with real-world errors.</p>
-    
-    <div>
-        <h2>Test Actions</h2>
-        <button onclick="testError()">Trigger JS Error</button>
-        <button onclick="testPromiseRejection()">Trigger Promise Rejection</button>
-        <button onclick="testApiError()">Simulate API Failure</button>
-        <button onclick="testJsonError()">Trigger JSON Parse Error</button>
-        <button onclick="testStorageError()">Trigger LocalStorage Error</button>
-        <button class="error" onclick="testNetworkError()">Simulate Network Error</button>
-    </div>
-    
-    <div>
-        <h2>Performance Test</h2>
-        <button onclick="heavyComputation()">Run Heavy Computation (Slows Page)</button>
-    </div>
-    
-    <div>
-        <h2>Console Log</h2>
-        <div id="consoleLog" class="log"></div>
+  <div class="container">
+    <h1>Monitoring SDK Test Page</h1>
+    <p>Use the buttons below to simulate real-world website errors and performance events.</p>
+
+    <h2>🧪 Test Error Scenarios</h2>
+    <div class="buttons">
+      <button onclick="testError()">Trigger JS Error</button>
+      <button onclick="testPromiseRejection()">Trigger Promise Rejection</button>
+      <button onclick="testApiError()">Simulate API Failure</button>
+      <button onclick="testJsonError()">Trigger JSON Parse Error</button>
+      <button onclick="testStorageError()">Trigger LocalStorage Error</button>
+      <button class="error" onclick="testNetworkError()">Simulate Network Error</button>
     </div>
 
-    <!-- Load the SDK -->
-    <script src="http://localhost:5000/sdk.js"></script>
-    <script>
-        // Initialize the SDK
-        MonitoringSDK.init({
-            apiKey: "878b0efc6d093a68a25524e730e3f7120544fdd5296601369e609341b5abad84",
-            endpoint: "http://localhost:5000/api/logs", 
-            trackErrors: true,
-            trackPerformance: true,
-            debug: true
+    <h2>⚙️ Performance Test</h2>
+    <div class="buttons">
+      <button onclick="heavyComputation()">Run Heavy Computation (Slow Task)</button>
+    </div>
+
+    <h2>🖥️ Console Log</h2>
+    <div id="consoleLog" class="log"></div>
+
+    <div class="footer">
+      <p>© 2025 Web Monitoring SDK — Demo Page</p>
+    </div>
+  </div>
+
+  <!-- Load the SDK -->
+  <script src="http://localhost:5000/sdk.js"></script>
+
+  <script>
+    // Initialize the SDK
+    MonitoringSDK.init({
+      apiKey: "d6796cfca3956132a41f7c781df18f2be98ed2f1b1a189bc4d03c5835dae7372",
+      endpoint: "http://localhost:5000/api/logs",
+      trackErrors: true,
+      trackPerformance: true,
+      debug: true
+    });
+
+    // Console log helper
+    function logToConsole(message) {
+      const logElement = document.getElementById('consoleLog');
+      const entry = document.createElement('div');
+      entry.textContent = new Date().toLocaleTimeString() + ' → ' + message;
+      logElement.appendChild(entry);
+      logElement.scrollTop = logElement.scrollHeight;
+    }
+
+    function testError() {
+      logToConsole("Triggering JavaScript error...");
+      throw new Error("Manual test error triggered!");
+    }
+
+    function testPromiseRejection() {
+      logToConsole('Triggering unhandled promise rejection...');
+      Promise.reject(new Error('Payment gateway timeout'));
+    }
+
+    function testApiError() {
+      logToConsole('Simulating API failure...');
+      fetch('http://localhost:5000/api/does-not-exist')
+        .then(res => {
+          if (!res.ok) throw new Error(`API failed with status ${res.status}`);
+        })
+        .catch(err => logToConsole('API error: ' + err.message));
+    }
+
+    function testJsonError() {
+      logToConsole('Triggering JSON parse error...');
+      try {
+        JSON.parse("{ invalid json }");
+      } catch (err) {
+        logToConsole('Caught JSON parse error: ' + err.message);
+        throw err;
+      }
+    }
+
+    function testStorageError() {
+      logToConsole('Triggering localStorage quota exceeded...');
+      try {
+        let bigData = "x".repeat(5 * 1024 * 1024);
+        localStorage.setItem("bigData", bigData);
+      } catch (err) {
+        logToConsole('Storage error: ' + err.message);
+        throw err;
+      }
+    }
+
+    function testNetworkError() {
+      logToConsole('Simulating network error...');
+      fetch('https://non-existent-domain-' + Date.now() + '.com')
+        .catch(error => {
+          logToConsole('Network error simulated: ' + error.message);
         });
+    }
 
-        // Helper log function
-        function logToConsole(message) {
-            const logElement = document.getElementById('consoleLog');
-            const entry = document.createElement('div');
-            entry.textContent = new Date().toLocaleTimeString() + ': ' + message;
-            logElement.appendChild(entry);
-            logElement.scrollTop = logElement.scrollHeight;
-        }
+    function heavyComputation() {
+      logToConsole('Running heavy computation...');
+      const start = Date.now();
+      let result = 0;
+      for (let i = 0; i < 50_000_000; i++) {
+        result += Math.sqrt(i) * Math.sin(i);
+      }
+      const duration = Date.now() - start;
+      logToConsole(`Heavy computation completed in ${duration}ms`);
+    }
 
-        // Test functions (real-world errors)
-        // function testError() {
-        //     logToConsole('Triggering undefined property error...');
-        //     const obj = {};
-        //     console.log(obj.user.name); // property access on undefined
-        // }
-
-        function testPromiseRejection() {
-            logToConsole('Triggering unhandled promise rejection...');
-            Promise.reject(new Error('Payment gateway timeout')); // common in prod
-        }
-
-        function testApiError() {
-            logToConsole('Simulating API failure...');
-            fetch('http://localhost:5000/api/does-not-exist')
-                .then(res => {
-                    if (!res.ok) throw new Error(`API failed with status ${res.status}`);
-                })
-                .catch(err => logToConsole('API error: ' + err.message));
-        }
-
-        function testJsonError() {
-            logToConsole('Triggering JSON parse error...');
-            try {
-                JSON.parse("{ invalid json }");
-            } catch (err) {
-                logToConsole('Caught JSON parse error: ' + err.message);
-                throw err; // let SDK capture
-            }
-        }
-
-        function testStorageError() {
-            logToConsole('Triggering localStorage quota exceeded...');
-            try {
-                let bigData = "x".repeat(5 * 1024 * 1024); // 5MB string
-                localStorage.setItem("bigData", bigData);
-            } catch (err) {
-                logToConsole('Storage error: ' + err.message);
-                throw err;
-            }
-        }
-
-        function testNetworkError() {
-            logToConsole('Simulating network error...');
-            fetch('https://non-existent-domain-' + Date.now() + '.com')
-                .catch(error => {
-                    logToConsole('Network error simulated: ' + error.message);
-                });
-        }
-
-        function heavyComputation() {
-            logToConsole('Running heavy computation...');
-            const start = Date.now();
-            let result = 0;
-            for (let i = 0; i < 100000000; i++) {
-                result += Math.sqrt(i) * Math.sin(i);
-            }
-            const duration = Date.now() - start;
-            logToConsole(`Heavy computation completed in ${duration}ms`);
-        }
-
-        // Initial log
-        logToConsole('Page loaded. SDK initialized.');
-    </script>
+    logToConsole('Page loaded. SDK initialized successfully.');
+  </script>
 </body>
 </html>
