@@ -8,6 +8,7 @@ const router = express.Router();
 router.get('/', auth, async (req, res) => {
   try {
     const alerts = await Alert.find({ userId: req.user._id }).sort({ createdAt: -1 });
+    
     res.json(alerts);
   } catch (error) {
     console.error('Error fetching alerts:', error);
@@ -19,6 +20,9 @@ router.get('/', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
   try {
     const { name, condition, threshold, timeframe, email } = req.body;
+
+    console.log(`name is ${name}`);
+    
     
     const alert = new Alert({
       userId: req.user._id,
